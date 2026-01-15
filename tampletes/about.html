@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | BlogSpace</title>
+
+  <style>
+    *{ box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b1220;
+      color: #e8eefc;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    .nav{
+      position: sticky;
+      top: 0;
+      background: rgba(11,18,32,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .logo{
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .logo-badge{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #4f7cff, #22d3ee);
+      font-weight: 800;
+      color: #07111f;
+    }
+
+    .logo-text{
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-right{
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav-right a{
+      color: #cdd8ff;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+
+    .nav-right a:hover{
+      background: rgba(255,255,255,0.06);
+      color: #ffffff;
+    }
+
+    .nav-right a.active{
+      background: rgba(79,124,255,0.18);
+      border: 1px solid rgba(79,124,255,0.25);
+      color: #ffffff;
+    }
+
+    /* HERO */
+    .hero{
+      padding: 78px 18px 50px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background:
+        radial-gradient(900px 450px at 50% 0%, rgba(79,124,255,0.35), transparent 60%),
+        radial-gradient(900px 450px at 80% 10%, rgba(34,211,238,0.20), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.35));
+    }
+
+    .hero-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pill{
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #cdd8ff;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+
+    .hero h1{
+      margin: 0;
+      font-size: 44px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span{
+      color: #9db7ff;
+    }
+
+    .sub{
+      max-width: 760px;
+      margin: 12px auto 0;
+      color: #cdd8ff;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-stats{
+      margin: 28px auto 0;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 980px;
+    }
+
+    .stat{
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .stat h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .stat p{
+      margin: 0;
+      color: #cdd8ff;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* CONTENT */
+    .container{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px 18px 60px;
+    }
+
+    .grid{
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card{
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p, .card li{
+      color: #cdd8ff;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .card ul{
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .highlight{
+      border: 1px solid rgba(79,124,255,0.25);
+      background: linear-gradient(180deg, rgba(79,124,255,0.10), rgba(255,255,255,0.04));
+    }
+
+    .btn-row{
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn.primary{
+      background: linear-gradient(135deg, #4f7cff, #22d3ee);
+      color: #07111f;
+    }
+
+    .btn.primary:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .btn.ghost{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e8eefc;
+    }
+
+    .btn.ghost:hover{
+      background: rgba(255,255,255,0.10);
+    }
+
+    .footer{
+      text-align: center;
+      margin-top: 34px;
+      color: rgba(232,238,252,0.65);
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .hero-stats{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      .hero h1{ font-size: 34px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-badge">B</div>
+      <div class="logo-text">BlogSpace</div>
+    </div>
+
+    <div class="nav-right">
+      <a href="{% url 'home' %}">Home</a>
+      <a class="active" href="{% url 'about' %}">About</a>
+      <a href="{% url 'blog' %}">Blog</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="pill">👋 About BlogSpace</p>
+      <h1>We help developers <span>Learn. Build. Grow.</span></h1>
+      <p class="sub">
+        BlogSpace is a clean, practical blog for Django, Python, and modern web development.
+        No long theory — just real projects, simple explanation, and clean code.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <h3>Practical</h3>
+          <p>Tutorials built from real projects.</p>
+        </div>
+        <div class="stat">
+          <h3>Beginner Friendly</h3>
+          <p>Easy steps + clear structure.</p>
+        </div>
+        <div class="stat">
+          <h3>Professional</h3>
+          <p>Best practices, not shortcuts.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="container">
+    <section class="grid">
+      <div class="card">
+        <h2>Our Mission</h2>
+        <p>
+          To make Django and web development easy to understand through short, practical,
+          and project-based guides — so you can build confidently.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>What You’ll Find Here</h2>
+        <ul>
+          <li>✅ Django projects (CRUD, Auth, Dashboards)</li>
+          <li>✅ Python tips and best practices</li>
+          <li>✅ Frontend basics for backend devs</li>
+          <li>✅ Deployment & real-world guides</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Why BlogSpace?</h2>
+        <p>
+          Because learning becomes faster when you focus on building. We keep things clean,
+          modern, and easy to follow — like the UI you’re making.
+        </p>
+      </div>
+
+      <div class="card highlight">
+        <h2>Let’s Connect</h2>
+        <p>
+          Have a question or want a topic covered? Reach out — we love helping developers grow.
+        </p>
+        <div class="btn-row">
+          <a class="btn primary" href="{% url 'contact' %}">Contact Us</a>
+          <a class="btn ghost" href="{% url 'blog' %}">Read Blog</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© {% now "Y" %} BlogSpace — Built with Django</p>
+    </footer>
+  </main>
+
+</body>
+</html>
